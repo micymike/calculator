@@ -1,7 +1,7 @@
 import streamlit as st
 import math
 
-# Define the operations
+# Defining the operations
 def add(x, y):
     return x + y
 
