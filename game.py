@@ -42,35 +42,26 @@ options = (
 answers = ("B", "B", "A", "A", "A", "B", "A", "B", "A", "A", "A", "C", "C", "A", "A")
 
 # Initialize session state variables
-def init_session():
-    if 'question_num' not in st.session_state:
-        st.session_state.question_num = 0
-    if 'score' not in st.session_state:
-        st.session_state.score = 0
-    if 'guesses' not in st.session_state:
-        st.session_state.guesses = []
-    if 'selected_answer' not in st.session_state:
-        st.session_state.selected_answer = ""
-    if 'start_time' not in st.session_state:
-        st.session_state.start_time = 0
-    if 'quiz_started' not in st.session_state:
-        st.session_state.quiz_started = False
-
-# Function to start the quiz
-def start_quiz():
-    init_session()
-    st.session_state.quiz_started = True
-    st.session_state.start_time = time.time()
+def init_session_state():
+    st.session_state.quiz_started = False
+    st.session_state.start_time = 0
     st.session_state.question_num = 0
     st.session_state.score = 0
     st.session_state.guesses = []
+    st.session_state.selected_answer = ""
 
-# Function to handle user input and progress through the quiz
+# Function to start the quiz
+def start_quiz():
+    init_session_state()
+    st.session_state.quiz_started = True
+    st.session_state.start_time = time.time()  # Start the timer
+
+# Function to handle user input and timer
 def submit_answer():
     elapsed_time = time.time() - st.session_state.start_time
     if elapsed_time > 10:
         st.warning("Time's up! You took too long to answer this question.")
-        st.session_state.selected_answer = ""
+        st.session_state.selected_answer = ""  # Reset selected answer
         return
     
     guess = st.session_state.selected_answer
@@ -81,45 +72,55 @@ def submit_answer():
     
     st.session_state.question_num += 1
     st.session_state.selected_answer = ""
-    st.session_state.start_time = time.time()
+    st.session_state.start_time = time.time()  # Reset start time for next question
 
 # Streamlit app layout
-st.title("Quiz Game")
-
-if not st.session_state.quiz_started:
-    st.write("Welcome to the Quiz Game!")
-    st.button("Start Quiz", on_click=start_quiz)
-else:
-    if st.session_state.question_num < len(questions):
-        st.write(f"Question {st.session_state.question_num + 1}: {questions[st.session_state.question_num]}")
-        
-        # Countdown timer display
-        time_left = max(0, 10 - (time.time() - st.session_state.start_time))
-        st.write(f"Time left: {int(time_left)} seconds")
-        
-        # Radio buttons for options
-        st.session_state.selected_answer = st.radio("Options", options=options[st.session_state.question_num], key=f"answer_{st.session_state.question_num}")
-        
-        # Submit button
-        if st.session_state.selected_answer:
-            st.button("Submit", on_click=submit_answer)
-        
-        # Restart button if time is up
-        if time_left == 0:
-            st.button("Restart", on_click=start_quiz)
+def main():
+    st.title("Quiz Game")
+    
+    if 'quiz_started' not in st.session_state:
+        init_session_state()
+    
+    if not st.session_state.quiz_started:
+        st.write("Welcome to the Quiz Game!")
+        st.button("Start Quiz", on_click=start_quiz)
     else:
-        st.write("Quiz completed!")
-        st.write(f"Your final score is: {st.session_state.score} out of {len(questions)}")
-        st.write(f"Score percentage: {int((st.session_state.score / len(questions)) * 100)}%")
-        
-        # Provide feedback based on performance
-        if st.session_state.score == len(questions):
-            st.write("Excellent! You got all the questions right!")
-        elif st.session_state.score >= 4:
-            st.write("Great job! You got most of the questions right!")
-        elif st.session_state.score >= 2:
-            st.write("Good effort! You got some of the questions right.")
+        if st.session_state.question_num < len(questions):
+            question = questions[st.session_state.question_num]
+            option = options[st.session_state.question_num]
+            
+            st.write(f"Question {st.session_state.question_num + 1}: {question}")
+            
+            # Countdown timer display
+            time_left = max(0, 10 - (time.time() - st.session_state.start_time))
+            st.markdown(f"Time left: **{int(time_left)}** seconds")
+            
+            # Radio buttons for options
+            st.session_state.selected_answer = st.radio("Options", options=option, key=f"answer_{st.session_state.question_num}")
+            
+            # Submit button
+            if st.session_state.selected_answer:
+                st.button("Submit", on_click=submit_answer)
+                
+            # Restart button if time is up
+            if time_left == 0:
+                st.button("Restart", on_click=lambda: init_session_state())
         else:
-            st.write("Keep trying! Practice makes perfect.")
-        
-        st.button("Restart", on_click=start_quiz)
+            st.write("Quiz completed!")
+            st.write(f"Your final score is: {st.session_state.score} out of {len(questions)}")
+            st.write(f"Score percentage: {int((st.session_state.score / len(questions)) * 100)}%")
+            
+            # Provide feedback based on performance
+            if st.session_state.score == len(questions):
+                st.write("Excellent! You got all the questions right!")
+            elif st.session_state.score >= 4:
+                st.write("Great job! You got most of the questions right!")
+            elif st.session_state.score >= 2:
+                st.write("Good effort! You got some of the questions right.")
+            else:
+                st.write("Keep trying! Practice makes perfect.")
+            
+            st.button("Restart", on_click=lambda: init_session_state())
+
+if __name__ == "__main__":
+    main()
