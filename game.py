@@ -85,7 +85,7 @@ def submit_answer():
 st.title("Quiz Game")
 
 if not st.session_state.quiz_started:
-    st.write("Welcome to the Quiz Game!")
+    st.write("Welcome to the Mike's Quiz Game!")
     st.button("Start Quiz", on_click=start_quiz)
 else:
     if st.session_state.question_num < len(questions):
