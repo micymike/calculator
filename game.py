@@ -3,7 +3,7 @@ import random
 import time
 
 # Define the quiz questions, options, and correct answers
-questions = (
+questions = [
     "How many elements are there in the periodic table?: ",
     "Which is the most abundant gas in Earth's atmosphere?: ",
     "What is the chemical symbol for gold?: ",
@@ -19,27 +19,27 @@ questions = (
     "What is the largest organ in the human body?: ",
     "What is the tallest mountain in the world?: ",
     "Who invented the telephone?: "
-)
+]
 
-options = (
-    ("A. 116", "B. 118", "C. 120", "D. 20"),
-    ("A. Oxygen", "B. Nitrogen", "C. Carbon dioxide", "D. Argon"),
-    ("A. Au", "B. Ag", "C. Fe", "D. Pb"),
-    ("A. Transpiration", "B. Photosynthesis", "C. Respiration", "D. Evaporation"),
-    ("A. Venus", "B. Mercury", "C. Earth", "D. Mars"),
-    ("A. London", "B. Paris", "C. Berlin", "D. Rome"),
-    ("A. Harper Lee", "B. J.K. Rowling", "C. Jane Austen", "D. Charles Dickens"),
-    ("A. Elephant", "B. Blue whale", "C. Giraffe", "D. Polar bear"),
-    ("A. 1912", "B. 1921", "C. 1905", "D. 1933"),
-    ("A. Leonardo da Vinci", "B. Pablo Picasso", "C. Vincent van Gogh", "D. Michelangelo"),
-    ("A. Yen", "B. Yuan", "C. Won", "D. Rupee"),
-    ("A. China", "B. Korea", "C. Japan", "D. Vietnam"),
-    ("A. Liver", "B. Brain", "C. Skin", "D. Heart"),
-    ("A. Mount Everest", "B. K2", "C. Mount Kilimanjaro", "D. Mount Fuji"),
-    ("A. Alexander Graham Bell", "B. Thomas Edison", "C. Nikola Tesla", "D. Guglielmo Marconi")
-)
+options = [
+    ["A. 116", "B. 118", "C. 120", "D. 20"],
+    ["A. Oxygen", "B. Nitrogen", "C. Carbon dioxide", "D. Argon"],
+    ["A. Au", "B. Ag", "C. Fe", "D. Pb"],
+    ["A. Transpiration", "B. Photosynthesis", "C. Respiration", "D. Evaporation"],
+    ["A. Venus", "B. Mercury", "C. Earth", "D. Mars"],
+    ["A. London", "B. Paris", "C. Berlin", "D. Rome"],
+    ["A. Harper Lee", "B. J.K. Rowling", "C. Jane Austen", "D. Charles Dickens"],
+    ["A. Elephant", "B. Blue whale", "C. Giraffe", "D. Polar bear"],
+    ["A. 1912", "B. 1921", "C. 1905", "D. 1933"],
+    ["A. Leonardo da Vinci", "B. Pablo Picasso", "C. Vincent van Gogh", "D. Michelangelo"],
+    ["A. Yen", "B. Yuan", "C. Won", "D. Rupee"],
+    ["A. China", "B. Korea", "C. Japan", "D. Vietnam"],
+    ["A. Liver", "B. Brain", "C. Skin", "D. Heart"],
+    ["A. Mount Everest", "B. K2", "C. Mount Kilimanjaro", "D. Mount Fuji"],
+    ["A. Alexander Graham Bell", "B. Thomas Edison", "C. Nikola Tesla", "D. Guglielmo Marconi"]
+]
 
-answers = ("B", "B", "A", "A", "A", "B", "A", "B", "A", "A", "A", "C", "C", "A", "A")
+answers = ["B", "B", "A", "A", "A", "B", "A", "B", "A", "A", "A", "C", "C", "A", "A"]
 
 # Initialize session state variables
 def init_session_state():
