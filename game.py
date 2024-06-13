@@ -18,7 +18,12 @@ questions = (
     "Which country is known as the Land of the Rising Sun?: ",
     "What is the largest organ in the human body?: ",
     "What is the tallest mountain in the world?: ",
-    "Who invented the telephone?: "
+    "Who invented the telephone?: ",
+    "Which is the only metal that is liquid at room temperature?: ",
+    "What is the smallest planet in our solar system?: ",
+    "Which element is diamond composed of?: ",
+    "Who discovered penicillin?: ",
+    "What is the hardest natural substance on Earth?: "
 )
 
 options = (
@@ -36,10 +41,18 @@ options = (
     ("A. China", "B. Korea", "C. Japan", "D. Vietnam"),
     ("A. Liver", "B. Brain", "C. Skin", "D. Heart"),
     ("A. Mount Everest", "B. K2", "C. Mount Kilimanjaro", "D. Mount Fuji"),
-    ("A. Alexander Graham Bell", "B. Thomas Edison", "C. Nikola Tesla", "D. Guglielmo Marconi")
+    ("A. Alexander Graham Bell", "B. Thomas Edison", "C. Nikola Tesla", "D. Guglielmo Marconi"),
+    ("A. Mercury", "B. Gold", "C. Iron", "D. Lead"),
+    ("A. Mercury", "B. Venus", "C. Earth", "D. Mars"),
+    ("A. Carbon", "B. Silicon", "C. Oxygen", "D. Nitrogen"),
+    ("A. Alexander Fleming", "B. Isaac Newton", "C. Albert Einstein", "D. Thomas Edison"),
+    ("A. Gold", "B. Diamond", "C. Titanium", "D. Quartz")
 )
 
-answers = ("B", "B", "A", "A", "A", "B", "A", "B", "A", "A", "A", "C", "C", "A", "A")
+answers = (
+    "B", "B", "A", "A", "A", "B", "A", "B", "A", "A",
+    "A", "C", "C", "A", "A", "B", "B", "A", "A", "B"
+)
 
 # Initialize score and guesses
 if 'score' not in st.session_state:
@@ -85,7 +98,7 @@ def submit_answer():
 st.title("Quiz Game")
 
 if not st.session_state.quiz_started:
-    st.write("Welcome to the Mike's Quiz Game!")
+    st.write("Welcome to the Quiz Game!")
     st.button("Start Quiz", on_click=start_quiz)
 else:
     if st.session_state.question_num < len(questions):
