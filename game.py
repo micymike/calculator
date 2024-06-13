@@ -66,7 +66,7 @@ def start_quiz():
 # Function to handle user input and timer
 def submit_answer():
     elapsed_time = time.time() - st.session_state.start_time
-    if elapsed_time > 5:
+    if elapsed_time > 10:
         st.warning("Time's up! You took too long to answer this question.")
         st.session_state.selected_answer = ""  # Reset selected answer
         return
@@ -95,7 +95,7 @@ else:
         st.write(f"Question {st.session_state.question_num + 1}: {question}")
         
         # Countdown timer display
-        time_left = max(0, 5 - (time.time() - st.session_state.start_time))
+        time_left = max(0, 10 - (time.time() - st.session_state.start_time))
         st.markdown(f"Time left: **{int(time_left)}** seconds")
         
         # Radio buttons for options
