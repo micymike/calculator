@@ -67,7 +67,9 @@ def submit_answer():
     guess = st.session_state.selected_answer
     st.session_state.guesses.append(guess)
     
-    if guess == answers[st.session_state.question_num]:
+    correct_answer = answers[st.session_state.question_num]  # Correct answer for the current question
+    
+    if guess == correct_answer:
         st.session_state.score += 1
     
     st.session_state.question_num += 1
@@ -86,6 +88,7 @@ def main():
         st.button("Start Quiz", on_click=start_quiz)
     else:
         if st.session_state.question_num < len(questions):
+            # Quiz in progress
             question = questions[st.session_state.question_num]
             option = options[st.session_state.question_num]
             
@@ -106,6 +109,7 @@ def main():
             if time_left == 0:
                 st.button("Restart", on_click=lambda: init_session_state())
         else:
+            # Quiz completed
             st.write("Quiz completed!")
             st.write(f"Your final score is: {st.session_state.score} out of {len(questions)}")
             st.write(f"Score percentage: {int((st.session_state.score / len(questions)) * 100)}%")
