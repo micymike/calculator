@@ -51,24 +51,23 @@ def main():
         <style>
         .stButton>button {
             width: 100%;
-            height: auto;
+            height: 100px;
             font-size: 24px;
             font-weight: bold;
             color: white;
-            padding: 15px;
             border: 2px solid #4CAF50;
         }
         @media (max-width: 600px) {
             .stButton>button {
-                font-size: 18px;
-                padding: 10px;
+                height: 80px;
+                font-size: 20px;
             }
         }
-        .stButton>button:hover {
-            background-color: #5e60ce;
-        }
-        .stButton>button:active {
-            background-color: #3a0ca3;
+        @media (max-width: 400px) {
+            .stButton>button {
+                height: 60px;
+                font-size: 16px;
+            }
         }
         .win-message {
             font-size: 24px;
