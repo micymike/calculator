@@ -55,6 +55,7 @@ def start_quiz():
     init_session_state()
     st.session_state.quiz_started = True
     st.session_state.start_time = time.time()  # Start the timer
+    
 
 # Function to handle user input and timer
 def submit_answer():
@@ -95,7 +96,7 @@ def main():
             st.write(f"Question {st.session_state.question_num + 1}: {question}")
             
             # Countdown timer display
-            time_left = max(0, 10 - (time.time() - st.session_state.start_time))
+            time_left = max(0, 11 - (time.time() - st.session_state.start_time))
             st.markdown(f"Time left: **{int(time_left)}** seconds")
             
             # Radio buttons for options
