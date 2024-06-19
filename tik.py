@@ -56,6 +56,13 @@ def main():
             font-weight: bold;
             color: white;
         }
+        @media (max-width: 600px) {
+            .stButton>button {
+                width: 60px;
+                height: 60px;
+                font-size: 18px;
+            }
+        }
         .stButton>button:hover {
             background-color: #5e60ce;
         }
@@ -66,11 +73,16 @@ def main():
             font-size: 36px;
             color: #2a9d8f;
             font-weight: bold;
+            text-align: center;
+            margin-top: 20px;
         }
         </style>
     """, unsafe_allow_html=True)
     
-    st.button("Restart Game", on_click=reset_game)
+    if st.button("Restart Game"):
+        reset_game()
+
+    st.write(f"Current Player: {'❌' if st.session_state.current_player == 'X' else '⭕'}")
 
     for row in range(3):
         cols = st.columns(3)
@@ -89,8 +101,6 @@ def main():
         st.markdown(f"<div class='win-message'>{st.session_state.winner} wins!</div>", unsafe_allow_html=True)
     elif all(all(cell is not None for cell in row) for row in st.session_state.board):
         st.markdown("<div class='win-message'>It's a draw!</div>", unsafe_allow_html=True)
-    else:
-        st.write(f"Current Player: {'❌' if st.session_state.current_player == 'X' else '⭕'}")
 
 if __name__ == "__main__":
     main()
