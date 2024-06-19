@@ -46,7 +46,7 @@ def reset_game():
     st.session_state.winner = None
 
 def main():
-    st.title("Tic Tac Toe")
+    st.title("Mike's Tic Tac Toe")
     st.markdown("""
         <style>
         .stButton>button {
