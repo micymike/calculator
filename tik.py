@@ -46,21 +46,22 @@ def reset_game():
     st.session_state.winner = None
 
 def main():
-    st.title("Mike's Tic Tac Toe")
+    st.title("Tic Tac Toe")
     st.markdown("""
         <style>
         .stButton>button {
-            width: 100px;
-            height: 100px;
+            width: 100%;
+            height: auto;
             font-size: 24px;
             font-weight: bold;
             color: white;
+            padding: 15px;
+            border: 2px solid #4CAF50;
         }
         @media (max-width: 600px) {
             .stButton>button {
-                width: 60px;
-                height: 60px;
                 font-size: 18px;
+                padding: 10px;
             }
         }
         .stButton>button:hover {
@@ -70,7 +71,7 @@ def main():
             background-color: #3a0ca3;
         }
         .win-message {
-            font-size: 36px;
+            font-size: 24px;
             color: #2a9d8f;
             font-weight: bold;
             text-align: center;
@@ -85,7 +86,7 @@ def main():
     st.write(f"Current Player: {'❌' if st.session_state.current_player == 'X' else '⭕'}")
 
     for row in range(3):
-        cols = st.columns(3)
+        cols = st.columns([1, 1, 1])
         for col in range(3):
             button_text = st.session_state.board[row][col] or ""
             if button_text == "X":
